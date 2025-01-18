@@ -1,5 +1,6 @@
 # Ignore build directories
 /build*/
+/env*/
 !build*/meson-install
 
 # Ignore Meson generated files
