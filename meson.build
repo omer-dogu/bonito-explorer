@@ -6,7 +6,17 @@ project('bonito-explorer', 'cpp',
 imgui_dep = dependency('imgui') 
 glfw3_dep = dependency('glfw3')
 
-exe = executable('bonito-explorer', 'bonito_explorer.cpp','imgui_impl_opengl3.cpp','imgui_impl_glfw.cpp',
+
+imgui_bindings_path = imgui_dep.get_variable('prefix') + '/res/bindings/'
+imgui_impl_sources=[
+  imgui_bindings_path + 'imgui_impl_opengl3.cpp',
+  imgui_bindings_path + 'imgui_impl_glfw.cpp'
+]
+
+imgui_impl_inc_dir = include_directories(imgui_bindings_path)
+
+exe = executable('bonito-explorer', 'bonito_explorer.cpp', imgui_impl_sources,
+  include_directories : imgui_impl_inc_dir,
   dependencies: [imgui_dep, glfw3_dep],
   install : true)
 

@@ -30,6 +30,7 @@ meson-private/
 # Ignore editor-specific files
 # Vim swap files
 *.swp
+.vscode/
 
 # Emacs backup files
 *~
@@ -42,6 +43,7 @@ Thumbs.db
 *.log
 *.bak
 *.tmp
+*.ini
 
 # Ignore compiled C source files
 *.c~
