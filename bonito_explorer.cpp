@@ -29,11 +29,9 @@
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 
-#include <algorithm>
+#include "displayFileTree.h"
 #include <chrono>
 #include <filesystem>
-#include <fstream>
-#include <iostream>
 #include <thread>
 
 static void glfw_error_callback(int error, const char* description)
@@ -93,8 +91,8 @@ int main(int, char**)
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; // Enable Gamepad Controls
 
     // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    // ImGui::StyleColorsLight();
+    // ImGui::StyleColorsDark();
+    ImGui::StyleColorsLight();
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -121,8 +119,6 @@ int main(int, char**)
     // IM_ASSERT(font != nullptr);
 
     // Our state
-    bool show_demo_window = true;
-    bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // Main loop
@@ -147,22 +143,18 @@ int main(int, char**)
             continue;
         }
 
-        // Start the Dear ImGui frame
+        // Start the Bonito Explorer frame
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-        // if (show_demo_window)
-        //    ImGui::ShowDemoWindow(&show_demo_window);
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+        // Main Window
         {
-            ImGui::Begin("");
-            for (auto& dir_entry : std::filesystem::directory_iterator { std::filesystem::current_path() }) {
-                ImGui::Text("%s\n", dir_entry.path().string().c_str());
-            }
+            ImGui::Begin("Debug is important!!");
+            dispFileTree("C:\\msys64\\home\\omer\\develop\\test_folder");
             ImGui::End();
         }
+
         // Rendering
         ImGui::Render();
         int display_w, display_h;

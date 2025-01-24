@@ -15,7 +15,8 @@ imgui_impl_sources=[
 
 imgui_impl_inc_dir = include_directories(imgui_bindings_path)
 
-exe = executable('bonito-explorer', 'bonito_explorer.cpp', imgui_impl_sources,
+exe = executable('bonito-explorer', 'bonito_explorer.cpp', 'displayFileTree.cpp',
+  imgui_impl_sources,
   include_directories : imgui_impl_inc_dir,
   dependencies: [imgui_dep, glfw3_dep],
   install : true)

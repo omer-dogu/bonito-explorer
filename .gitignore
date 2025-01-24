@@ -44,6 +44,7 @@ Thumbs.db
 *.bak
 *.tmp
 *.ini
+*.py
 
 # Ignore compiled C source files
 *.c~
