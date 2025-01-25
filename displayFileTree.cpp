@@ -15,18 +15,27 @@
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
 
+#include "displayFileTree.h"
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 
-void dispFileTree(const std::filesystem::path& dir_path, int depth = 0)
+void dispFileTree(const std::filesystem::path& dir_path)
 {
-    for (auto const& dir_entry : std::filesystem::recursive_directory_iterator(dir_path)) {
-        if (std::filesystem::is_directory(dir_entry)) {
-            ImGui::Text("\t");
-            ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.5f, 0.0f, 1.0f));
+    if (ImGui::TreeNode(dir_path.filename().string().c_str()))
+    {
+        for (auto const& dir_entry : std::filesystem::directory_iterator(dir_path)) {
+            if (std::filesystem::is_directory(dir_entry)) {
+                dispFileTree(dir_entry);
+            }
+            else {
+                ImGui::Bullet();
+                ImGui::TextColored(ImVec4(0.0f, 0.0f, 1.0f, 1.0f), "%s", dir_entry.path().filename().string().c_str());
+            }
         }
-        ImGui::Text("%s", dir_entry.path().filename().string().c_str());
+        ImGui::TreePop();
     }
+    ImGui::PopStyleColor();
 }

@@ -147,11 +147,17 @@ int main(int, char**)
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        /*
+                // Our state
+                bool show_demo_window = true;
 
+                if (show_demo_window)
+                    ImGui::ShowDemoWindow(&show_demo_window);
+        */
         // Main Window
         {
             ImGui::Begin("Debug is important!!");
-            dispFileTree("C:\\msys64\\home\\omer\\develop\\test_folder");
+            dispFileTree("C:\\msys64\\home\\omer");
             ImGui::End();
         }
 
