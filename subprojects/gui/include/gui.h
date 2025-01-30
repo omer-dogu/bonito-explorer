@@ -1,10 +1,9 @@
 #pragma once
 
-class Gui
-{
+class Gui {
 private:
     /* data */
 public:
-    Gui(/* args */);
+    Gui();
     ~Gui();
 };

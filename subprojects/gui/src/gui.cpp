@@ -33,7 +33,6 @@ static void glfw_error_callback(int error, const char* description)
     fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 
-
 Gui::Gui(/* args */)
 {
     glfwSetErrorCallback(glfw_error_callback);
@@ -163,7 +162,10 @@ Gui::Gui(/* args */)
 #ifdef __EMSCRIPTEN__
     EMSCRIPTEN_MAINLOOP_END;
 #endif
+}
 
+Gui::~Gui()
+{
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
@@ -171,8 +173,4 @@ Gui::Gui(/* args */)
 
     glfwDestroyWindow(window);
     glfwTerminate();
-}
-
-Gui::~Gui()
-{
 }

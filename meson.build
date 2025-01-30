@@ -6,13 +6,16 @@ project('bonito-explorer', 'cpp',
 gui_proj = subproject('gui')
 gui_dep  = gui_proj.get_variable('libgui_dep')
 
+logger_proj = subproject('logger')
+logger_dep  = logger_proj.get_variable('liblogger_dep')
+
 bonito_explorer_sources =[
   'src/main.cpp'
 ]
 
 exe = executable('bonito-explorer', bonito_explorer_sources,
   include_directories : 'include',
-  dependencies: [gui_dep],
+  dependencies: [gui_dep, logger_dep],
   install : true)
 
 test('basic', exe)
