@@ -1,16 +1,11 @@
-// Dear ImGui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
-// (GLFW is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
+#include "gui.h"
 
-// Learn about Dear ImGui:
-// - FAQ                  https://dearimgui.com/faq
-// - Getting Started      https://dearimgui.com/getting-started
-// - Documentation        https://dearimgui.com/docs (same as your local docs/ folder).
-// - Introduction, links and more at the top of imgui.cpp
+#include "displayFileTree.h"
 
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-#include <stdio.h>
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+
 #define GL_SILENCE_DEPRECATION
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
@@ -29,7 +24,6 @@
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 
-#include "displayFileTree.h"
 #include <chrono>
 #include <filesystem>
 #include <thread>
@@ -39,12 +33,12 @@ static void glfw_error_callback(int error, const char* description)
     fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 
-// Main code
-int main(int, char**)
+
+Gui::Gui(/* args */)
 {
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
-        return 1;
+        return;
 
     // Decide GL+GLSL versions
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -78,7 +72,7 @@ int main(int, char**)
     // Create window with graphics context
     GLFWwindow* window = glfwCreateWindow(1280, 720, "Bonito Explorer", nullptr, nullptr);
     if (window == nullptr)
-        return 1;
+        return;
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
@@ -177,6 +171,8 @@ int main(int, char**)
 
     glfwDestroyWindow(window);
     glfwTerminate();
+}
 
-    return 0;
+Gui::~Gui()
+{
 }

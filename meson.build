@@ -3,22 +3,16 @@ project('bonito-explorer', 'cpp',
   default_options : ['warning_level=3',
                      'cpp_std=c++17'])
 
-imgui_dep = dependency('imgui') 
-glfw3_dep = dependency('glfw3')
+gui_proj = subproject('gui')
+gui_dep  = gui_proj.get_variable('libgui_dep')
 
-
-imgui_bindings_path = imgui_dep.get_variable('prefix') + '/res/bindings/'
-imgui_impl_sources=[
-  imgui_bindings_path + 'imgui_impl_opengl3.cpp',
-  imgui_bindings_path + 'imgui_impl_glfw.cpp'
+bonito_explorer_sources =[
+  'src/main.cpp'
 ]
 
-imgui_impl_inc_dir = include_directories(imgui_bindings_path)
-
-exe = executable('bonito-explorer', 'bonito_explorer.cpp', 'displayFileTree.cpp',
-  imgui_impl_sources,
-  include_directories : imgui_impl_inc_dir,
-  dependencies: [imgui_dep, glfw3_dep],
+exe = executable('bonito-explorer', bonito_explorer_sources,
+  include_directories : 'include',
+  dependencies: [gui_dep],
   install : true)
 
 test('basic', exe)
