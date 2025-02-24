@@ -20,7 +20,7 @@
 #include <fstream>
 #include <iostream>
 
-void dispFileTree(const std::filesystem::path& dir_path, int depth = 0)
+void dispFileTree(const std::filesystem::path& dir_path)
 {
     for (auto const& dir_entry : std::filesystem::recursive_directory_iterator(dir_path)) {
         if (std::filesystem::is_directory(dir_entry)) {

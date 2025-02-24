@@ -1,8 +1,11 @@
 #pragma once
 
+#include <GLFW/glfw3.h>
+
 class Gui {
 private:
-    /* data */
+    GLFWwindow* window;
+
 public:
     Gui();
     ~Gui();

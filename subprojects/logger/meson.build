@@ -11,11 +11,5 @@ logger_sources = [
     'src/logger.cpp',
 ]
 
-liblogger = shared_library('logger', [logger_sources],
-  include_directories :[logger_include_dir],
-  dependencies: [spdlog_dep],
-  install : true
-)
-
 liblogger_dep = declare_dependency(include_directories : logger_include_dir,
-  link_with : liblogger)
+  dependencies: spdlog_dep)

@@ -2,4 +2,4 @@
 
 #include <filesystem>
 
-void dispFileTree(const std::filesystem::path& dir_path, int depth = 0);
+void dispFileTree(const std::filesystem::path& dir_path);

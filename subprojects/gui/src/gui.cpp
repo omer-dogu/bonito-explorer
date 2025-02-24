@@ -69,7 +69,7 @@ Gui::Gui(/* args */)
 #endif
 
     // Create window with graphics context
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Bonito Explorer", nullptr, nullptr);
+    window = glfwCreateWindow(1280, 720, "Bonito Explorer", nullptr, nullptr);
     if (window == nullptr)
         return;
     glfwMakeContextCurrent(window);
